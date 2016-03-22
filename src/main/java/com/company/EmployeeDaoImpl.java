@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class EmployeeDaoImpl implements IEmployeeDAO {
     SessionFactory sessionFactory1 = new Configuration().configure("mysqlconfig1.cfg.xml").buildSessionFactory();
-    SessionFactory sessionFactory2 = new Configuration().configure("mysqlconfig1.cfg.xml").buildSessionFactory();
+    SessionFactory sessionFactory2 = new Configuration().configure("mysqlconfig2.cfg.xml").buildSessionFactory();
     Session session = null;
     Transaction transaction = null;
 
@@ -20,7 +20,7 @@ public class EmployeeDaoImpl implements IEmployeeDAO {
             transaction.begin();
             Criteria crit = session.createCriteria(Employee.class);
             empList = (ArrayList<Employee>) crit.list();
-            System.out.println("Records from Session1");
+            System.out.println("Records from db1");
             for (Employee emp : empList) {
                 System.out.println(emp.getEmpid() + " " + emp.getEmpname() + " " + emp.getSalary());
 
@@ -29,7 +29,7 @@ public class EmployeeDaoImpl implements IEmployeeDAO {
             session = sessionFactory2.openSession();
             Criteria crit1 = session.createCriteria(Employee.class);
             empList = (ArrayList) crit1.list();
-            System.out.println("Records from Session2");
+            System.out.println("Records from db2");
             for (Employee emp : empList) {
                 System.out.println(emp.getEmpid() + " " + emp.getEmpname() + " " + emp.getSalary());
             }
